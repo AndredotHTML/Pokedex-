@@ -23,9 +23,19 @@ async function renderPokemonCardsTemplate(pokemonList) {
         let response = await fetch(pokemon.url);
         let pokeData = await response.json();
 
-        console.log(pokeData.types[0].type.name);
-        
-        
         contentRef.innerHTML += getPokemonCardsTemplate(pokeData, Index);
     };
+}
+
+
+function loadPrev() {
+    if (offset > 0) {
+        offset -= limit;
+        fetchPokemon(offset);
+    }
+}
+
+function loadNext() {
+    offset += limit;
+    fetchPokemon(offset);
 }

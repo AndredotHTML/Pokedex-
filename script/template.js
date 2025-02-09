@@ -8,7 +8,7 @@ function getPokemonCardsTemplate(pokeData) {
 
     return `<div class="pokemon_card ${firstType}"> <h2>${pokeData.name}</h2> 
         <img class="pokemon_sprite" src="${pokeData.sprites.front_default}" alt="${pokeData.name}">
-        <div class="type_container"><div> <img class="type_img" src="/assets/${firstType}.png" alt="${firstType}"></div>
+        <div class="type_container"> <div> <img class="type_img" src="/assets/${firstType}.png" alt="${firstType}"></div>
     ${secondType ? `
         <div class="type_container"> 
             <img class="type_img" src="/assets/${secondType}.png" alt="${secondType}">
