@@ -23,7 +23,8 @@
     gap: 24px;
     width: 80%;
     max-width: 1920px;
-    margin: auto
+    margin: auto;
+    padding-top: 120px;
 }
 
 .pokemon_card {
@@ -212,6 +213,7 @@
     width: 360px;
     position: fixed;
     top: 24px;
+    z-index: 999;
 }
 
 .close-detailed-card {
@@ -435,7 +437,7 @@
     }
 }
 
-@media (max-width: 550px) {
+@media (max-width: 580px) {
     #content {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -452,6 +454,27 @@
     .titel {
         margin: 0;
     }
+
+    .nav-button {
+        top: 25%;
+    }
+
+    .pkm_img {
+        display: flex;
+        justify-content: center;
+    }
+
+    .detailed_pokemon_sprite {
+        width: 160px;
+    }
+
+    .shiny-pkmn-sprite {
+        width: 160px;
+    }
+
+    .shiny-container {
+        height: 100%;
+    }
 }
 
 @media (max-width: 400px) {
@@ -461,5 +484,10 @@
     .detailed_card {
         width: 100%;
         top: 0;
+        bottom: 0;
+    }
+
+    .pokemon_card h2{
+        font-size: 16px;
     }
 }
