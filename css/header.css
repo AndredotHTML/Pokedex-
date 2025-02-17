@@ -1,5 +1,19 @@
 header {
     display: flex;
-    height: 120px;
-    background-color: #E83E34;
+    align-items: center;
+    justify-content: space-between;
+    height: 104px;
+    background-color: #242B2E;
+    margin-bottom: 60px;
+    font-size: 32px;
+    color: #FDD23C;
+}
+
+@media (max-width: 550px) {
+    header {
+        flex-direction: column;
+        height: auto;
+        justify-content: center;
+        align-items: center;
+    }
 }

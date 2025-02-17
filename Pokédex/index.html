@@ -13,22 +13,35 @@
 
     <script src="/script/script.js"></script>
     <script src="/script/template.js"></script>
-    <script src="/script/storage.js"></script>
     <style></style>
 </head>
 
 <body onload="init()">
 
-    <header></header>
-    
-    <div id="content"></div>
-    <div id="detailed_cards"></div>
-    <div id="controls">
-        <button id="prev" onclick="loadPrev()">&#9665; Zurück</button>
-        <button id="next" onclick="loadNext()">Weiter &#9655;</button>
-    </div>
-    <footer></footer>
+    <header> 
+        <div class="titel">
+            <h1>P </h1> <img class="pokeball" src="/assets/pokeball.png" alt="o"> <h1>kédex</h1>
+        </div>
+        <input type="text" id="search-bar" placeholder="Search Pokémon..." oninput="handleSearch()"> 
+    </header>
 
+    <div id="content"></div>
+
+    <div id="overlay" class="d_none" onclick="closeDetailedCard()"></div>
+
+    <div id="detailed_content" class="d_none"></div>
+
+    <div id="loading-screen">
+        <div class="spinner"></div>
+        <p>Laden...</p>
+    </div>
+
+    <div id="controls">
+        <button class="control_button" id="prev" onclick="loadPrev()">&#9665; Zurück</button>
+        <button class="control_button" id="next" onclick="loadNext()">Weiter &#9655;</button>
+    </div>
+
+    <footer>© 2025 André Zelmer</footer>
 </body>
 
 </html>
