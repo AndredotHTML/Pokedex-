@@ -7,9 +7,7 @@ function getPokemonCardsTemplate(pokeData) {
 
     if (pokeData.types.length > 1) {
         secondType = pokeData.types[1].type.name;
-    }
-
-    return `<div class="pokemon_card ${firstType}" data-pokemon='${pokeData.name}' onclick="handleCardClick(this), toggleOverlay()"> 
+    } return `<div class="pokemon_card ${firstType}" data-pokemon='${pokeData.name}' onclick="handleCardClick(this), toggleOverlay()"> 
         <h2>${pokeData.name}</h2> 
         <div class="pokemon_card_container">
         <img class="pokemon_sprite" src="${pokeData.sprites.other["official-artwork"].front_default}" alt="${pokeData.name}">
@@ -17,9 +15,7 @@ function getPokemonCardsTemplate(pokeData) {
     ${secondType ? `
         <div> 
         <img class="type_img" src="/assets/${secondType}.png" alt="${secondType}">
-        </div>` : ""}
-        </div>
-        </div>
+        </div>` : ""} </div></div>
     </div>`;
 }
 
@@ -79,12 +75,11 @@ function displayStats(contentRef) {
 function displayDetails(contentRef) {
     let firstType = currentPokeData.types[0].type.name;
     let secondType = currentPokeData.types.length > 1 ? currentPokeData.types[1].type.name : null;
-
     contentRef.innerHTML = `
         <div class="details-container">
-            <div class="details-content"> <p>Gewicht:</p> <p class="details-value">${(currentPokeData.weight / 10).toFixed(1)} kg</p> </div>
-            <div class="details-content"> <p>Größe:</p> <p class="details-value">${(currentPokeData.height / 10).toFixed(1)} m</p> </div>
-            <div class="details-content"> <p>Basis-Erfahrung:</p> <p class="details-value">${currentPokeData.base_experience} exp</p> </div>
+            <div class="details-content"> <p>Weight:</p> <p class="details-value">${(currentPokeData.weight / 10).toFixed(1)} kg</p> </div>
+            <div class="details-content"> <p>Height:</p> <p class="details-value">${(currentPokeData.height / 10).toFixed(1)} m</p> </div>
+            <div class="details-content"> <p>Base-experience:</p> <p class="details-value">${currentPokeData.base_experience} exp</p> </div>
             <div class="details-content"> <p>Type:</p> <div class="detail-types"> <p>${firstType} </p>
             ${secondType ? `<p>/${secondType}</p></div>` : ""}
             </div>

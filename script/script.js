@@ -24,8 +24,6 @@ async function getPokemonData(pokemonName, pokemonUrl = null) {
     const response = await fetch(pokemonUrl);
     const pokeData = await response.json();
     cachedPokemon[pokemonName] = pokeData; 
-    
-    
     return pokeData;
 }
 
@@ -33,11 +31,7 @@ async function getPokemonData(pokemonName, pokemonUrl = null) {
 async function fetchPokemon(offset) {
     if (isLoading) return;
     isLoading = true;
-
-    document.getElementById("loading-screen").style.display = "flex";
-    document.getElementById("content").style.display = "none";
-    document.getElementById("controls").style.display = "none";
-
+    loadingscreenOn()
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`);
     const data = await response.json();
 
@@ -47,20 +41,27 @@ async function fetchPokemon(offset) {
 
     loadedPokemonList = pokemonDetails;
     await renderPokemonCardsTemplate(pokemonDetails);
+    loadingscreenOff()
+    isLoading = false;
+}
 
+function loadingscreenOn() {
+    document.getElementById("loading-screen").style.display = "flex";
+    document.getElementById("content").style.display = "none";
+    document.getElementById("controls").style.display = "none";
+}
+
+
+function loadingscreenOff() {
     document.getElementById("loading-screen").style.display = "none";
     document.getElementById("content").style.display = "grid";
     document.getElementById("controls").style.display = "flex";
-
-    isLoading = false;
-
 }
 
 
 async function renderPokemonCardsTemplate(pokemonList) {
     let contentRef = document.getElementById("content");
     contentRef.innerHTML = ""; 
-
 
     const pokemonDetails = await Promise.all(
         pokemonList.map(async (pokemon) => await getPokemonData(pokemon.name))
@@ -73,7 +74,6 @@ async function renderPokemonCardsTemplate(pokemonList) {
 
 async function renderDetailedCard(pokemonName) {
     let pokeData = await getPokemonData(pokemonName);
-
     let contentRef = document.getElementById("detailed_content");
     currentPokeData = pokeData;
     contentRef.innerHTML = getDetailedCardTemplate(pokeData);
@@ -114,7 +114,6 @@ function loadNext() {
 
 function closeDetailedCard() {
     let refOverlay = document.getElementById('overlay');
-
     document.getElementById("detailed_content").classList.toggle("d_none")
     refOverlay.classList.toggle('d_none')
 }
@@ -122,7 +121,6 @@ function closeDetailedCard() {
 
 function toggleOverlay() {
     let refOverlay = document.getElementById('overlay');
-
     refOverlay.classList.toggle('d_none')
 }
 
@@ -149,22 +147,21 @@ function handleSearch() {
         return; 
     }
 
-    document.getElementById("loading-screen").style.display = "flex";
-    document.getElementById("content").style.display = "none";
+    loadingscreenOn();
 
     searchTimeout = setTimeout(async () => {
-        const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=1025");
-        const data = await response.json();
-        const filteredPokemon = data.results
-            .filter(pokemon => pokemon.name.startsWith(query))
-            .slice(0, 8); 
-        
+        const filteredPokemon = await fetchAndFilterPokemon(query);
         renderPokemonCardsTemplate(filteredPokemon);
+        loadingscreenOff();
+    }, 300);
+}
 
-        document.getElementById("loading-screen").style.display = "none";
-        document.getElementById("content").style.display = "grid";
-    }, 300); 
-    
+async function fetchAndFilterPokemon(query) {
+    const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=1025");
+    const data = await response.json();
+    return data.results
+        .filter(pokemon => pokemon.name.startsWith(query))
+        .slice(0, 8);
 }
 
 
@@ -185,7 +182,7 @@ function showPreviousPokemon() {
     if (currentPokemonIndex < 0) {
         currentPokemonIndex = loadedPokemonList.length - 1;
     }
+
     console.log(loadedPokemonList[currentPokemonIndex].name);
-    
     renderDetailedCard(loadedPokemonList[currentPokemonIndex].name);
 }

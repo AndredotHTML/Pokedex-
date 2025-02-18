@@ -12,10 +12,18 @@ body {
     font-family: "Outfit";
     height: 100%;
     margin: 0;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     background-color: #FDD23C;
+}
+
+.inner_body {
+    max-width: 1920px;
+    margin: auto;
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
 }
 
 #overlay {

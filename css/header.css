@@ -3,15 +3,19 @@ header {
     align-items: center;
     justify-content: space-between;
     height: 104px;
+    width: 100%;
     background-color: #242B2E;
     margin-bottom: 60px;
     font-size: 32px;
     color: #FDD23C;
     position: fixed;
     top: 0;
-    right: 0;
-    left: 0;
     z-index: 9;
+    max-width: 1920px;
+}
+
+header h1 {
+    filter: drop-shadow(2px 4px 6px black);
 }
 
 @media (max-width: 550px) {
